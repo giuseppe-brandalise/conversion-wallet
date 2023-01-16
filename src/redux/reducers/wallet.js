@@ -2,9 +2,6 @@
 import { CHANGE_WALLET } from '../actions';
 
 const INITIAL_STATE = {
-  user: {
-    email: '', // string que armazena o email da pessoa usuária
-  },
   wallet: {
     currencies: [], // array de string
     expenses: [], // array de objetos, com cada objeto tendo as chaves id, value, currency, method, tag, description e exchangeRates
@@ -18,7 +15,6 @@ const walletReducer = (state = INITIAL_STATE, action) => {
   case CHANGE_WALLET:
     return {
       ...state,
-      test: 'test',
     };
   default:
     return state;
