@@ -20,11 +20,16 @@ class Header extends Component {
     }
   }
 
-  sumExpenses = (expenses) => {
-    expenses.forEach((expense) => {
-      const { sum } = this.state;
-      this.setState({ sum: sum + expense.value });
-    });
+  sumExpenses = () => {
+    const { expenses } = this.props;
+    if (expenses !== undefined) {
+      this.setState({ sum: 0 });
+      expenses.forEach((expense) => {
+        const { sum } = this.state;
+        const { exchangeRates, currency, value } = expense;
+        this.setState({ sum: sum + (Number(value) * exchangeRates[currency].ask) });
+      });
+    }
   };
 
   render() {
@@ -36,12 +41,12 @@ class Header extends Component {
           { email }
         </div>
         <div data-testid="total-field">
-          { sum }
+          { sum.toFixed(2) }
         </div>
         <div data-testid="header-currency-field">
           BRL
         </div>
-        <WalletForm />
+        <WalletForm sumExpenses={ this.sumExpenses } />
       </div>
     );
   }
