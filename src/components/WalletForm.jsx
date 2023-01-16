@@ -76,8 +76,6 @@ class WalletForm extends Component {
       tag,
     } = this.state;
 
-    const { sumExpenses } = this.props;
-
     return (
       <form>
         <input
@@ -135,7 +133,6 @@ class WalletForm extends Component {
           onClick={ async () => {
             this.economiaAPI();
             await this.submitExpense();
-            sumExpenses();
           } }
         >
           Adicionar despesa
@@ -148,7 +145,6 @@ class WalletForm extends Component {
 WalletForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  sumExpenses: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

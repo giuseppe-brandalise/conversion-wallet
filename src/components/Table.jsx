@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { deleteExpense } from '../redux/actions';
 
 class Table extends Component {
+  deleteExpense = (expense) => {
+    const { dispatch, expenses } = this.props;
+    const newExpenses = expenses.filter((teste) => teste.id !== expense.id);
+    // const correctsIds = newExpenses.map((teste, index) => ({
+    //   ...teste,
+    //   id: index,
+    // }));
+    dispatch(deleteExpense(newExpenses));
+  };
+
   render() {
     const { expenses } = this.props;
     return (
@@ -21,7 +32,7 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {expenses.map((expense) => (
+          { expenses.length === 0 ? null : expenses.map((expense) => (
             <tr key={ expense.id }>
               <td>{ expense.description }</td>
               <td>{ expense.tag }</td>
@@ -38,7 +49,17 @@ class Table extends Component {
                 }
               </td>
               <td>Real</td>
-              <th>Editar/Excluir</th>
+              <td>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  onClick={ () => {
+                    this.deleteExpense(expense);
+                  } }
+                >
+                  Excluir
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -48,8 +69,12 @@ class Table extends Component {
 }
 
 Table.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
     description: PropTypes.string,
+    tag: PropTypes.string,
+    method: PropTypes.string,
     value: PropTypes.string,
   })).isRequired,
 };
