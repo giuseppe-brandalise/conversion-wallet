@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import WalletForm from './WalletForm';
 
 class Header extends Component {
   constructor() {
@@ -40,6 +41,7 @@ class Header extends Component {
         <div data-testid="header-currency-field">
           BRL
         </div>
+        <WalletForm />
       </div>
     );
   }
@@ -47,11 +49,9 @@ class Header extends Component {
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  expenses: PropTypes.shape([
-    PropTypes.shape({
-      value: PropTypes.number,
-    }),
-  ]).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.number,
+  })).isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,16 +1,19 @@
 export const SAVE_USER = 'SAVE_USER';
-export const CHANGE_WALLET = 'CHANGE_WALLET';
+export const SAVE_CURRENCY = 'SAVE_CURRENCY';
 export const SET_INITIAL_STATE = 'SET_INITIAL_STATE';
 
 export const saveUSer = (email) => ({
   type: SAVE_USER,
-  payload:
+  payload: {
     email,
+  },
 });
 
-export const cahngeWallet = (informations) => ({
-  type: CHANGE_WALLET,
-  informations,
+export const saveCurrency = (currencies) => ({
+  type: SAVE_CURRENCY,
+  payload: {
+    currencies,
+  },
 });
 
 export const setInitialState = () => ({
