@@ -57,7 +57,6 @@ class WalletForm extends Component {
       tag,
       id: expenses.length,
     };
-    console.log(expense);
     dispatch(saveExpense(expense));
     this.setState({
       value: '',

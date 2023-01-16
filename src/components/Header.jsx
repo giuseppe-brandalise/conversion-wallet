@@ -55,7 +55,7 @@ class Header extends Component {
 Header.propTypes = {
   email: PropTypes.string.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.number,
+    value: PropTypes.string,
   })).isRequired,
 };
 
